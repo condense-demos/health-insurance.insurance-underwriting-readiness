@@ -271,7 +271,17 @@ export class EventRouter {
       status: "RECEIVED",
       attributes: {
         nicotineIndicator:
-          this.demoNicotineIndicator
+          this.demoNicotineIndicator,
+        activeMedications: [
+          {
+            name: "Varenicline",
+            category: "Smoking cessation",
+            lastFilled: "2026-07-18"
+          }
+        ],
+        prescriptionCountLast12Months: 6,
+        providerMatchConfidence: 0.97,
+        sourceRecordDate: "2026-08-20"
       },
       timestamp:
         new Date().toISOString()

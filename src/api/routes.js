@@ -207,6 +207,30 @@ export function registerRoutes(
           });
       }
 
+      const evidenceDetails =
+        evidenceType === "MEDICAL_EXAM"
+          ? {
+              examDate: "2026-08-26",
+              provider: "LifeSure Partner Medical Center",
+              heightCm: 168,
+              weightKg: 72,
+              bmi: 25.5,
+              bloodPressure: "122/78",
+              pulseBpm: 74,
+              generalAssessment: "No significant abnormalities observed"
+            }
+          : {
+              physician: "Dr. Emily Carter",
+              specialty: "Internal Medicine",
+              lastVisitDate: "2026-06-12",
+              yearsAsPatient: 8,
+              majorConditions: ["None reported"],
+              recentHospitalizations: "None",
+              currentMedications: ["Varenicline"],
+              physicianSummary:
+                "Stable general health. No active cardiovascular or diabetic condition documented."
+            };
+
       const event = {
         eventId: randomUUID(),
         applicationId,
@@ -214,6 +238,7 @@ export function registerRoutes(
           "EVIDENCE_RECEIVED",
         evidenceType,
         status: "RECEIVED",
+        details: evidenceDetails,
         timestamp:
           new Date().toISOString()
       };

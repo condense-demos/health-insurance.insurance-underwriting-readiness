@@ -17,7 +17,8 @@ export function ensureEvidenceRequirements(
     const item = {
       ...requirement,
       createdAt: timestamp,
-      receivedAt: null
+      receivedAt: null,
+      details: null
     };
 
     state.evidence[requirement.type] = item;
@@ -30,29 +31,22 @@ export function ensureEvidenceRequirements(
 export function receiveEvidence(
   state,
   evidenceType,
-  timestamp = new Date().toISOString()
+  timestamp = new Date().toISOString(),
+  details = {}
 ) {
   const item = state.evidence?.[evidenceType];
 
   if (!item) {
-    return {
-      changed: false,
-      reason: "UNKNOWN_EVIDENCE"
-    };
+    return { changed: false, reason: "UNKNOWN_EVIDENCE" };
   }
 
   if (item.status === "RECEIVED") {
-    return {
-      changed: false,
-      reason: "ALREADY_RECEIVED"
-    };
+    return { changed: false, reason: "ALREADY_RECEIVED" };
   }
 
   item.status = "RECEIVED";
   item.receivedAt = timestamp;
+  item.details = details && typeof details === "object" ? details : {};
 
-  return {
-    changed: true,
-    item
-  };
+  return { changed: true, item };
 }

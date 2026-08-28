@@ -270,7 +270,8 @@ export class CaseProcessor {
       receiveEvidence(
         state,
         event.evidenceType,
-        timestamp
+        timestamp,
+        event.details || event.payload || {}
       );
 
     if (!result.changed) {
